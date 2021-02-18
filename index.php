@@ -6,14 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/rss.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Lector de feeds</title>
 </head>
 <body>
     <!--formulario para añadir la URL a leer-->
-    <div>
+    <div class="feed">
         <form method="POST" action="">
-            <input type="text" name="feedurl" placeholder="Escribe el feeds">&nbsp;<input type="submit" value="Enviar" name="submit">
+            <input class="rss" type="text" name="feedurl" placeholder="Escribe el feeds">&nbsp;<input type="submit" value="Enviar" name="submit">
         </form>
+    </div>
     <?php
     //URL a leer por defecto
     $url = "http://feeds.weblogssl.com/xataka2";
@@ -37,7 +39,7 @@
         //Descripción del canal
         $site = $feeds->channel->title;
         $sitelink = $feeds->channel->link;
-        echo '<h1>'.$site.'</h1>';
+        echo '<h1 class="sitio">'.$site.'</h1>';
         //Por cada noticia:
         foreach ($feeds->channel->item as $item) {
             //Creamos variables con información de la noticia
@@ -49,18 +51,19 @@
             if($i>=5) break; //5 es el número de noticias a mostrar
     
             //Mostramos información por pantalla de la noticia
-            echo '<div>';
-            echo '<div>';
-            //Título de la noticia
-            echo '<h2><a href="'.$link.'">'.$title.'</a></h2>';
-            echo '<span>'.$pubDate.'</span>';
-            echo '</div>';
-            //Cuerpo de la noticia
-            echo '<div>';
-            //echo implode(' ', array_slice(explode(' ', $description), 0, 20)) . "...";
-            echo '<div>'.$description.'</div>';
-            echo '<a href="'.$link.'">Leer más</a>';
-            echo '</div>';
+            echo '<div class="seccion">';
+                echo '<div class="seccion2">';
+                //Título de la noticia
+                echo '<h2><a href="'.$link.'">'.$title.'</a></h2>';
+                
+                echo '</div>';
+                //Cuerpo de la noticia
+                echo '<div class="seccion2">';
+                //echo implode(' ', array_slice(explode(' ', $description), 0, 20)) . "...";
+                echo '<div class="descripcion">'.$description.'</div>';
+                echo '<span>'.$pubDate.'</span>';
+                echo '<a href="'.$link.'">Leer más</a>';
+                echo '</div>';
             echo '</div>';
             $i++;
         }
